@@ -4,7 +4,7 @@ const amqp = require('amqplib');
 const queue = process.env.QUEUE || 'hello'
 
 function intensiveOperation() {
-    let i = le9
+    let i = 1000000000
     while (i--) {}
 }
 
@@ -18,10 +18,12 @@ async function subscriber() {
     channel.consume(queue, message => {
         const content = JSON.parse(message.content.toString());
 
+        intensiveOperation();
+
         console.log(`Received message from ${queue}`);
         console.log(content);
-    }, {
-        noAck: true
+
+        channel.ack(message); // confirmation for remove message from queue
     })
 
   }

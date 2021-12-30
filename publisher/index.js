@@ -3,7 +3,7 @@
 const amqp = require("amqplib");
 const queue = process.env.QUEUE || "hello";
 
-const messageAmount = 6;
+const messageAmount = 10;
 const wait = 400;
 
 function sleep(ms) {
